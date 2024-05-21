@@ -79,6 +79,31 @@ exports.login = async function (req, res) {
     return res.status(500).json({ type: error.name, message: error.message });
   }
 };
+
+exports.verifyToken = async function (req, res) {
+  try {
+    let accessToken = req.headers.authorization;
+    if (!accessToken) return res.json(false);
+    accessToken = accessToken.replace('Bearer', '').trim();
+
+    const token = await Token.findOne({ accessToken });
+    if (!token) return res.json(false);
+
+    const tokenData = jwt.decode(token.refreshToken);
+
+    const user = await User.findById(tokenData.id);
+    if (!user) return res.json(false);
+
+    const isValid = jwt.verify(
+      token.refreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+    if (!isValid) return res.json(false);
+    return res.json(true);
+  } catch (error) {
+    return res.status(500).json({ type: error.name, message: error.message });
+  }
+};
 exports.forgotPassword = async function (req, res) {};
 exports.verifyPasswordResetOTP = async function (req, res) {};
 exports.resetPassword = async function (req, res) {};
