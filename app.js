@@ -26,6 +26,7 @@ const adminRouter = require('./routes/admin');
 const categoriesRouter = require('./routes/categories');
 const productsRouter = require('./routes/products');
 const checkoutRouter = require('./routes/checkout');
+const ordersRouter = require('./routes/orders');
 
 app.use(`${API}/`, authRouter);
 app.use(`${API}/users`, usersRouter);
@@ -33,6 +34,7 @@ app.use(`${API}/admin`, adminRouter);
 app.use(`${API}/categories`, categoriesRouter);
 app.use(`${API}/products`, productsRouter);
 app.use(`${API}/checkout`, checkoutRouter);
+app.use(`${API}/orders`, ordersRouter);
 app.use('/public', express.static(__dirname + '/public'));
 
 
