@@ -14,7 +14,8 @@
     "multer": "^1.4.5-lts.1",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.13",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "stripe": "^15.8.0"
   },
   "name": "sammie_ecomly_server",
   "version": "1.0.0",
